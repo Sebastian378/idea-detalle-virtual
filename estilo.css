@@ -1,0 +1,160 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.escena{
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================= ESCENAS ================= */
+.scene{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.scene.active{
+  display: flex;
+}
+
+/* ================= TEXTO ================= */
+.scene h1{
+  text-align: center;
+  font-size: clamp(26px, 6vw, 40px);
+}
+
+/* ================= IMÁGENES (BITMOJI) ================= */
+.scene img{
+  width: clamp(180px, 55vw, 260px);
+  height: auto;
+}
+
+/* ================= BOTÓN ================= */
+.btn-siguiente{
+  margin-top: 6px;
+  font-size: 16px;
+  padding: 0.9em 2.3em;
+  font-weight: 500;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 0.6em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* efecto del botón */
+.gradient{
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    rgba(0,0,0,0),
+    rgba(0,0,0,0),
+    rgba(0,0,0,0.3)
+  );
+}
+
+.label{
+  position: relative;
+  z-index: 2;
+}
+
+.transition{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(244, 0, 0, 0.6);
+  border-radius: 9999px;
+  transition: 0.5s ease;
+}
+
+.btn-siguiente:hover .transition{
+  width: 14em;
+  height: 14em;
+}
+
+.btn-siguiente:active{
+  transform: scale(0.97);
+}
+
+/* ================= ANIMACIONES ================= */
+.from-left{
+  animation: entrarIzquierda 1.2s ease forwards;
+}
+
+.from-right{
+  animation: entrarDerecha 1.2s ease forwards;
+}
+
+@keyframes entrarIzquierda{
+  from{
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  to{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes entrarDerecha{
+  from{
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ================= RESPONSIVE (iPhone) ================= */
+@media (max-width: 420px){
+  .scene img{
+    width: 200px;
+  }
+
+  .scene h1{
+    font-size: 28px;
+  }
+}
+
+/* ================= CARD FINAL ================= */
+.card{
+  display: none;
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 999;
+}
+
+.card.active{
+  display: flex;
+  animation: subirCard 0.8s ease forwards;
+}
+
+/* animación de abajo hacia arriba */
+@keyframes subirCard{
+  from{
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
